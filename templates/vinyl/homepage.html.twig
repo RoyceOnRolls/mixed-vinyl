@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    All records mate!
+{% endblock %}
+
 {% block body %}
     <h1>{{ title }}</h1>
 
     <div>
-        <h2>Tracks: </h2>
+        <h2>Tracks: 👑</h2>
         <ul>
             {% for track in tracks %}
                 <li>{{ track.song }} - {{track.artist}}</li>
