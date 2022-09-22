@@ -10,7 +10,7 @@ use function Symfony\Component\String\u;
 class VinylController extends AbstractController
 {
 
-    #[Route("/")]
+    #[Route("/", name:"app_homepage")]
     public function homepage(): Response
     {
         $tracks = [
@@ -26,7 +26,7 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route("/browse/{slug}")]
+    #[Route("/browse/{slug}", name:"app_browse")]
     public function browse(string $slug = null): Response
     {
         $genre = $slug ? u(str_replace("-", " ", $slug))->title(true) : null;
