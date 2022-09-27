@@ -7,10 +7,8 @@ use Psr\Cache\CacheItemInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Cache\CacheInterface;
 
 use function Symfony\Component\String\u;
-use Symfony\Contracts\HttpClient\HttpClientInterface;  
 
 class VinylController extends AbstractController
 {
@@ -32,11 +30,11 @@ class VinylController extends AbstractController
     }
 
     #[Route("/browse/{slug}", name: "app_browse")]
-    public function browse(HttpClientInterface $httpClient, MixRepository $mixRepository, CacheInterface $cache, string $slug = null): Response
+    public function browse(MixRepository $mixRepository, string $slug = null): Response
     {
         $genre = $slug ? u(str_replace('-', ' ', $slug))->title(true) : null;
 
-        $mixes = $mixRepository->findAll($httpClient, $cache);
+        $mixes = $mixRepository->findAll();
 
         return $this->render('vinyl/browse.html.twig', [
             'genre' => $genre,
